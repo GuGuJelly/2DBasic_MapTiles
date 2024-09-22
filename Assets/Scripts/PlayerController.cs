@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 {
     // SpriteRenderer 자료형은 스프라이트 이미지를 좌우 반전 시키는 변수를 만들 수 있다
     [SerializeField] SpriteRenderer render;
+    [SerializeField] Animator animator;
+    
     [SerializeField] Rigidbody2D rigid;
     [SerializeField] float movePower;
     [SerializeField] float maxMoveSpeed;
@@ -52,6 +54,16 @@ public class PlayerController : MonoBehaviour
         {
             // -방향의 최고속도 설정
             rigid.velocity = new Vector2(-maxMoveSpeed, rigid.velocity.y);
+        }
+
+        // sqrMagnitude는 크기다. 그래서 속도의 크기가 된다
+        if (rigid.velocity.sqrMagnitude < 0.01)
+        {
+            animator.SetBool("isRunning", false);
+        }
+        else 
+        {
+            animator.SetBool("isRunning", true);
         }
 
         //if (rigid.velocity.y < -maxFallSpeed)
