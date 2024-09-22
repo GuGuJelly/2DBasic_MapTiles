@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,9 +15,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float maxFallSpeed;
     private float x;
 
+    [Header("UI")]
+    [SerializeField] TextMeshProUGUI scoreText;
+
+    public int score;
+
+
     private void Update()
     {
         x = Input.GetAxisRaw("Horizontal");
+        scoreText.text = $"Gem: {score}";
     }
 
     private void FixedUpdate()
@@ -67,8 +76,6 @@ public class PlayerController : MonoBehaviour
         rigid.AddForce(Vector2.up*jumpPower, ForceMode2D.Impulse);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
-    }
+    
+
 }
